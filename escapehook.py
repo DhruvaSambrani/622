@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import urllib.parse
 import re
 import sys
 
@@ -39,7 +40,7 @@ for i in range(1, len(linkrefs)-2):
         newtitle = inhtml
     linkrefs[i] = linkrefs[i][:titleloc[0]]+"\""+newtitle+"\""
     parts = re.match("\[(.*)\]:\ (.*?)\ \"(.*)\"", linkrefs[i]).groups()
-    link = parts[0].split("|")[0]
+    link = parts[0].split("|")[0].replace(" ", "-").lower()
     linkrefs[i] = f'[{parts[0]}]: {link} "{parts[2]}"'
     
 open(sys.argv[-1], "w").write(text[:linkrefstart]+"\n".join(linkrefs))
