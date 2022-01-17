@@ -4,24 +4,30 @@
 @import "{{ site.theme }}";
 
 body {
-    background-color: #191919;
+    background-color: #04293a;
 }
 
 .markdown-body {
-    max-width: 1000px;
+    max-width: 900px;
+    width: 90%;
     font-size: 16px;
     background-color: #28374E;
     color: #DED7CA;
-    padding: 30px !important;
+    padding: 5% 20px !important;
     border-radius: 8px;
+    border-color: white;
+
 }
 
 .markdown-body > :first-child{
-    color: #ffffff;
+    color: #ffffff !important;
+    border: none;
+    text-align: center;
+    font-size: 24px;
 }
 
 .markdown-body a {
-    color: #C84B31 !important;    
+    color: #F85E3B !important;    
 }
 
 .markdown-body p {
