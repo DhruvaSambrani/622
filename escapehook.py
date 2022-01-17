@@ -24,5 +24,20 @@ for section in wikilinksections:
             print("Replacing", list_text[i], "at", i)
             list_text[i] = "\\"+list_text[i]
 
-open(sys.argv[-1], "w").write("".join(list_text))
+text = "".join(list_text)
+linkrefstart = re.search(r"\[//begin\]", text).span()[0]
+linkrefs = text[linkrefstart:].split("\n")
+print("Found", len(linkrefs)-2, "link refs")
+for i in range(1, len(linkrefs)-1):
+    linkrefs[i] = linkrefs[i].replace("\\|", "|")
+    titleloc = re.search('".*"', linkrefs[i]).span()
+    inhtml = re.search("\[(.*)\]", linkrefs[i]).group(1)
+    if "|" in inhtml:
+        newtitle = inhtml.split("|")[1]
+        print("Replacing", linkrefs[i][titleloc[0]:titleloc[1]], "with", newtitle)
+    else:
+        newtitle = inhtml
+    linkrefs[i] = linkrefs[i][:titleloc[0]]+"\""+newtitle+"\""
+    
+open(sys.argv[-1], "w").write(text[:linkrefstart]+"\n".join(linkrefs))
 
