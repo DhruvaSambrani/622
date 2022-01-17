@@ -28,7 +28,7 @@ text = "".join(list_text)
 linkrefstart = re.search(r"\[//begin\]", text).span()[0]
 linkrefs = text[linkrefstart:].split("\n")
 print("Found", len(linkrefs)-2, "link refs")
-for i in range(1, len(linkrefs)-1):
+for i in range(1, len(linkrefs)-2):
     linkrefs[i] = linkrefs[i].replace("\\|", "|")
     titleloc = re.search('".*"', linkrefs[i]).span()
     inhtml = re.search("\[(.*)\]", linkrefs[i]).group(1)
@@ -38,6 +38,9 @@ for i in range(1, len(linkrefs)-1):
     else:
         newtitle = inhtml
     linkrefs[i] = linkrefs[i][:titleloc[0]]+"\""+newtitle+"\""
+    parts = re.match("\[(.*)\]:\ (.*?)\ \"(.*)\"", linkrefs[i]).groups()
+    link = parts[0].split("|")[0]
+    linkrefs[i] = f'[{parts[0]}]: {link} "{parts[2]}"'
     
 open(sys.argv[-1], "w").write(text[:linkrefstart]+"\n".join(linkrefs))
 
