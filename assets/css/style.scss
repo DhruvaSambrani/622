@@ -4,22 +4,38 @@
 @import "{{ site.theme }}";
 
 .markdown-body {
-  max-width: 800px;
-  font-size: 16px;
+    max-width: 800px;
+    font-size: 16px;
+    background-color: #28374E;
+    color: #DED7CA;
+    padding: 16px !important;
+    border-radius: 8px;
+}
+
+.markdown-body > :first-child{
+    color: #ffffff;
+}
+
+.markdown-body a {
+    color: #C84B31 !important;    
 }
 
 .markdown-body p {
-  font-size: 16px;
-  line-height: 1.9em;
-  margin-bottom: 1.2em;
+    font-size: 16px;
+    line-height: 1.5em;
+    margin-bottom: 1.2em;
 }
 
 .markdown-body li {
-  line-height: 1.9em;
+    line-height: 1.9em;
 }
 
 input.task-list-item-checkbox {
-  margin-right: 4px;
+    margin-right: 4px;
+}
+
+.markdown-body h1,h2,h3,h4,h5 {
+    color: #b2e961;
 }
 
 h1,
